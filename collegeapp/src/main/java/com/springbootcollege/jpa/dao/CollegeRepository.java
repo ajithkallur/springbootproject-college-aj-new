@@ -13,8 +13,9 @@ import com.springbootcollege.jpa.entities.Department;
 
 
 
-public interface DepartmentRepository extends PagingAndSortingRepository<Department, Integer> {
+public interface CollegeRepository extends PagingAndSortingRepository<College, Integer> {
 
-	Optional<Department> findByName(String name);
+	Optional<College> findByName(String name);
+	
     
 }

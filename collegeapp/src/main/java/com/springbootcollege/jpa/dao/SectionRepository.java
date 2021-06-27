@@ -8,13 +8,13 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
-import com.springbootcollege.jpa.entities.College;
 import com.springbootcollege.jpa.entities.Department;
+import com.springbootcollege.jpa.entities.Project;
+import com.springbootcollege.jpa.entities.Section;
 
 
 
-public interface DepartmentRepository extends PagingAndSortingRepository<Department, Integer> {
-
-	Optional<Department> findByName(String name);
+public interface SectionRepository extends PagingAndSortingRepository<Section, Integer> {
     
+	Optional<Section> findByRoomNumber(int num);
 }
