@@ -38,12 +38,12 @@ public class CollegeController {
 	}
 	
 	@GetMapping(path = "/colleges/name/{name}")
-	public Optional<College> findCollegeByName( @PathVariable("name") String name){
+	public List<College> findCollegeByName( @PathVariable("name") String name){
 		return collRepo.findByName(name);
 	}
 	
 	@GetMapping(path = "/colleges/id/{id}/departments")
-	public Set<Department> findDepartmentsByCollegeId( @PathVariable("id") int id){
+	public List<Department> findDepartmentsByCollegeId( @PathVariable("id") int id){
 		
 		College clg = collRepo.findById(id).get();
 		return clg.getDepartments();

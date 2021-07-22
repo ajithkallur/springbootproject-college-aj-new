@@ -41,7 +41,7 @@ public class DepartmentController {
 	}
 	
 	@GetMapping(path = "/colleges/departments/name/{name}")
-	public Optional<Department> findDepartmentByName( @PathVariable("name") String name){
+	public List<Department> findDepartmentByName( @PathVariable("name") String name){
 		return depRepo.findByName(name);
 	}
 

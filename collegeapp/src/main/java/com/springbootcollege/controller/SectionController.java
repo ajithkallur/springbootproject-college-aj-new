@@ -44,7 +44,7 @@ public class SectionController {
 	}
 	
 	@GetMapping(path = "/colleges/departments/sections/roomnumber/{num}")
-	public Optional<Section> findDepartmentByName( @PathVariable("num") int num){
+	public List<Section> findDepartmentByName( @PathVariable("num") int num){
 		return secRepo.findByRoomNumber(num);
 	}
 

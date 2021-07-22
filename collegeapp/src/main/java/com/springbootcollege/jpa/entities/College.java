@@ -25,9 +25,9 @@ public class College {
 	private String city;
 	
     @OneToMany(mappedBy = "college")
-	private Set<Department> departments;
+	private List<Department> departments;
 
-	public void setDepartments(Set<Department> departments) {
+	public void setDepartments(List<Department> departments) {
 		this.departments = departments;
 	}
 
@@ -47,7 +47,7 @@ public class College {
 		this.name = name;
 	}
 
-	public Set<Department> getDepartments() {
+	public List<Department> getDepartments() {
 		return  departments;
 	}
 
