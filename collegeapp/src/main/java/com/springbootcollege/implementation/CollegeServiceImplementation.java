@@ -1,20 +1,18 @@
-package com.springboot.implementation;
+package com.springbootcollege.implementation;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.springboot.college.interfce.CollegeInterface;
+import com.springbootcollege.interfce.CollegeServiceInterface;
 import com.springbootcollege.jpa.dao.CollegeRepository;
 import com.springbootcollege.jpa.entities.College;
 import com.springbootcollege.jpa.entities.Department;
 
 
-
-
 @Service
-public class CollegeImplementation implements CollegeInterface{
+public class CollegeServiceImplementation implements CollegeServiceInterface{
 
 	@Autowired
 	CollegeRepository collRepo;
@@ -43,7 +41,6 @@ public class CollegeImplementation implements CollegeInterface{
 
 	@Override
 	public College createCollege(College college) {
-		// TODO Auto-generated method stub
 		return collRepo.save(college);
 	}
 

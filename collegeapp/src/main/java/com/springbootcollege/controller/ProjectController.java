@@ -45,7 +45,12 @@ public class ProjectController {
 		return proRepo.findById(id).get();
 	}
 	
-	
+	@GetMapping(path = "/colleges/departments/sections/students/id/{id}/projects")
+	public List<Project> findProjectsByStudentId( @PathVariable("id") int id){
+		
+		Student stu = stuRepo.findById(id).get();
+		return stu.getProjects();
+	}
 	@PostMapping(path = "/colleges/departments/sections/students/projects", consumes = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Project create(@RequestBody @Validated Project project) {

@@ -46,14 +46,12 @@ public class StudentController {
 		return stuRepo.findById(id).get();
 	}
 	
-
-	@GetMapping(path = "/colleges/departments/sections/students/id/{id}/projects")
-	public List<Project> findProjectsByStudentId( @PathVariable("id") int id){
+	@GetMapping(path = "/colleges/departments/sections/id/{id}/students")
+	public List<Student> findStudentsBySectionId( @PathVariable("id") int id){
 		
-		Student stu = stuRepo.findById(id).get();
-		return stu.getProjects();
+		Section sect = secRepo.findById(id).get();
+		return sect.getStudents();
 	}
-	
 	@PostMapping(path = "/colleges/departments/sections/students", consumes = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Student create(@RequestBody @Validated Student student) {
