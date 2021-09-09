@@ -59,7 +59,7 @@ public class ProjectController {
 	
 	@PutMapping(path = "/colleges/departments/sections/student/{stid}/project/{pid}", consumes = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public Student addStudentToProject(@PathVariable("stid") int stid, @PathVariable("pid") int pid ) {
+	public Student assignStudentToProject(@PathVariable("stid") int stid, @PathVariable("pid") int pid ) {
 				
 	
 	Student stu = stuRepo.findById(stid).get();

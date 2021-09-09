@@ -13,6 +13,6 @@ public interface ProjectServiceInterface {
 	Section findById(int id);
 	List<Project> findAll();
 	Project createProject(Project project);
-	List<Student> findSectionsByDepartmentId(int id);
-	College assignCollegeToDepartment(int cid, int did);
+	List<Project> findProjectsByStudentId(int id);
+	Student assignStudentToProject(int stid, int pid);
 }

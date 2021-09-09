@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springbootcollege.interfce.SectionServiceInterface;
+import com.springbootcollege.interfce.StudentServiceInterface;
 import com.springbootcollege.jpa.dao.CollegeRepository;
 import com.springbootcollege.jpa.dao.DepartmentRepository;
 import com.springbootcollege.jpa.dao.SectionRepository;
@@ -29,7 +31,7 @@ import com.springbootcollege.jpa.entities.Student;
 public class StudentController {
 
 	@Autowired
-	StudentRepository stuRepo;
+	StudentServiceInterface studentService;
 	
 	@Autowired
 	SectionRepository secRepo;
@@ -38,36 +40,29 @@ public class StudentController {
 	
 	@GetMapping(path = "/colleges/departments/sections/students")
 	public Iterable<Student> getAllStudents(){
-		return stuRepo.findAll();
+		return studentService.findAll();
 	}
 	
 	@GetMapping(path = "/colleges/departments/sections/students/id/{id}")
 	public Student findStudentById( @PathVariable("id") int id){
-		return stuRepo.findById(id).get();
+		return studentService.findById(id);
 	}
 	
 	@GetMapping(path = "/colleges/departments/sections/id/{id}/students")
 	public List<Student> findStudentsBySectionId( @PathVariable("id") int id){
 		
-		Section sect = secRepo.findById(id).get();
-		return sect.getStudents();
+		return studentService.findStudentsBySectionId(id);
 	}
 	@PostMapping(path = "/colleges/departments/sections/students", consumes = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Student create(@RequestBody @Validated Student student) {
-		return stuRepo.save(student);
+		return studentService.createStudent(student);
 	}
 	
 	@PutMapping(path = "/colleges/departments/section/{seid}/student/{stid}", consumes = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public Section assignSectionToStudent(@PathVariable("seid") int seid, @PathVariable("stid") int stid ) {
-				
-	
-	Section sec = secRepo.findById(seid).get();
-	Student stu = stuRepo.findById(stid).get();
-	stu.setSection(sec);
-	 stuRepo.save(stu);
-	 return sec;
+	public Section assignSectionToStudent(@PathVariable("seid") int seid, @PathVariable("stid") int stid ) {		
+	 return studentService.assignSectionToStudent(seid, stid);
 	}
 }
 

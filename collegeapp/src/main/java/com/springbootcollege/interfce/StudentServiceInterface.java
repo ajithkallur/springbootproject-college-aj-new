@@ -9,7 +9,7 @@ import com.springbootcollege.jpa.entities.Student;
 
 public interface StudentServiceInterface {
 	List<Student> findStudentsBySectionId(int id);
-	Section findById(int id);
+	Student findById(int id);
 	List<Student> findAll();
 	Student createStudent(Student student);
 	Section assignSectionToStudent(int seid, int stid);
