@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springbootcollege.interfce.ProjectServiceInterface;
 import com.springbootcollege.jpa.dao.CollegeRepository;
 import com.springbootcollege.jpa.dao.DepartmentRepository;
 import com.springbootcollege.jpa.dao.ProjectRepository;
@@ -30,44 +31,36 @@ import com.springbootcollege.jpa.entities.Student;
 public class ProjectController {
 
 	@Autowired
-	ProjectRepository proRepo;
+	ProjectServiceInterface projectService;
 	
-	@Autowired
-	StudentRepository stuRepo;
-	
+
 	@GetMapping(path = "/colleges/departments/sections/students/projects")
 	public Iterable<Project> getAllProjects(){
-		return proRepo.findAll();
+		return projectService.findAll();
 	}
 	
 	@GetMapping(path = "/colleges/departments/sections/students/projects/id/{id}")
 	public Project findProjectById( @PathVariable("id") int id){
-		return proRepo.findById(id).get();
+		return projectService.findById(id);
 	}
 	
 	@GetMapping(path = "/colleges/departments/sections/students/id/{id}/projects")
 	public List<Project> findProjectsByStudentId( @PathVariable("id") int id){
 		
-		Student stu = stuRepo.findById(id).get();
-		return stu.getProjects();
+		return projectService.findProjectsByStudentId(id);
 	}
 	@PostMapping(path = "/colleges/departments/sections/students/projects", consumes = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Project create(@RequestBody @Validated Project project) {
-		return proRepo.save(project);
+		return projectService.createProject(project);
 	}
 	
 	@PutMapping(path = "/colleges/departments/sections/student/{stid}/project/{pid}", consumes = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public Student assignStudentToProject(@PathVariable("stid") int stid, @PathVariable("pid") int pid ) {
 				
-	
-	Student stu = stuRepo.findById(stid).get();
-	Project prj = proRepo.findById(pid).get();
-	prj.addStuToPrj(stu);
-	 proRepo.save(prj);
-	 return stu;
-	}
+		return projectService.assignStudentToProject(stid, pid);
+	};
 	
 	
 }

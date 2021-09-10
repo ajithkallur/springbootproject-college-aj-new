@@ -9,8 +9,7 @@ import com.springbootcollege.jpa.entities.Section;
 import com.springbootcollege.jpa.entities.Student;
 
 public interface ProjectServiceInterface {
-	List<Project> findByName(String name);
-	Section findById(int id);
+	Project findById(int id);
 	List<Project> findAll();
 	Project createProject(Project project);
 	List<Project> findProjectsByStudentId(int id);
